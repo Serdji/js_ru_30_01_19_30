@@ -1,8 +1,10 @@
 import React, { PropTypes, Component } from 'react'
 import ArticleList from './ArticleList'
 import Chart from './Chart'
+import Calendar from './Calendar'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+
 
 class App extends Component {
     state = {
@@ -18,6 +20,7 @@ class App extends Component {
         }))
         return (
             <div>
+                <Calendar />
                 User: <input type="text" value={this.state.user} onChange={this.handleUserChange}/>
                 <Select options = {options} onChange={this.handleSelectChange} value={this.state.selection} multi/>
                 <ArticleList articles={articles}/>
