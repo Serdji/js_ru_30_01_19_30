@@ -7,28 +7,47 @@ function sunday(day) {
   return day.getDay() === 0;
 }
 
+let date = new Date()
+
+let optionsTime = {
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric'
+}
+
+let optionsDate = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  weekday: 'long'
+
+};
+
 class Calendar extends Component {
+
   state = {
-    selectedDay: new Date(),
+    selectedDay: null,
   }
-  handleDayClick(e, day, { selected, disabled }) {
-    if (disabled) {
-      return;
-    }
-    if (selected) {
-      this.setState({ selectedDay: null })
-    } else {
-      this.setState({ selectedDay: day });
-    }
+
+  handleDayClick = (e, day, { selected }) => {
+    this.setState({
+      selectedDay: selected ? null : day,
+    });
   }
+
   render() {
+    const { selectedDay } = this.state;
     return (
-      <DayPicker
-        initialMonth={ new Date(2016, 1) }
-        disabledDays={ sunday }
-        selectedDays={ day => DateUtils.isSameDay(this.state.selectedDay, day) }
-        onDayClick={ this.handleDayClick.bind(this) }
-    />);
+      <div>
+        <DayPicker
+          selectedDays={ day => DateUtils.isSameDay(selectedDay, day) }
+          onDayClick={ this.handleDayClick }
+        />
+        <p>
+          { selectedDay ? `${selectedDay.toLocaleString('ru', optionsDate)} Время: ${date.toLocaleString('ru', optionsTime)}` : 'Please select a day 👻' }
+        </p>
+      </div>
+    );
   }
 }
 
