@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+//Название так себе, в остальном - ок
 class Answer extends Component {
 
   state = {
